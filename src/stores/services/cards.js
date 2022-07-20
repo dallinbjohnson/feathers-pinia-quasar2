@@ -86,12 +86,8 @@ const useStore = defineStore({
   state() {
     return {};
   },
-  getters() {
-    return {};
-  },
-  actions() {
-    return {};
-  },
+  getters: {},
+  actions: {},
 });
 
 // const beforeHook = context => {
