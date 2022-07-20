@@ -4,7 +4,7 @@ import { defineStore, BaseModel } from "feathers-pinia";
 // import {/*diff, */lodash} from '@iy4u/common-client-lib';
 // const {$lget, $lset} = lodash;
 
-export class Users extends BaseModel {
+export class Cards extends BaseModel {
   // constructor(data, options) {
   //   super(data, options);
   // }
@@ -22,42 +22,42 @@ export class Users extends BaseModel {
   //   }
   // }
 
-  // Define default properties here
-  static instanceDefaults(/*data, {models, store}*/) {
-    return {
-      email: undefined,
-      name: undefined,
-      phone: undefined,
-      roles: [],
-      phones: [],
-      addresses: [],
-      logins: {
-        ids: [],
-        active: undefined
-      },
-      settings: {
-        theme: {
-          darkMode: undefined,
-          "--q-color-primary": undefined,
-          "--q-color-secondary": undefined,
-          "--q-color-accent": undefined,
-          "--q-color-dark": undefined,
-
-          "--q-color-positive": undefined,
-          "--q-color-negative": undefined,
-          "--q-color-info": undefined,
-          "--q-color-warning": undefined
-        }
-      },
-      createdBy: undefined,
-      updatedBy: undefined,
-      createdAt: undefined,
-      updatedAt: undefined,
-      avatar: undefined,
-      banner: undefined,
-      images: undefined
-    };
-  }
+  // // Define default properties here
+  // static instanceDefaults(/*data, {models, store}*/) {
+  //   return {
+  //     email: undefined,
+  //     name: undefined,
+  //     phone: undefined,
+  //     roles: [],
+  //     phones: [],
+  //     addresses: [],
+  //     logins: {
+  //       ids: [],
+  //       active: undefined
+  //     },
+  //     settings: {
+  //       theme: {
+  //         darkMode: undefined,
+  //         "--q-color-primary": undefined,
+  //         "--q-color-secondary": undefined,
+  //         "--q-color-accent": undefined,
+  //         "--q-color-dark": undefined,
+  //
+  //         "--q-color-positive": undefined,
+  //         "--q-color-negative": undefined,
+  //         "--q-color-info": undefined,
+  //         "--q-color-warning": undefined
+  //       }
+  //     },
+  //     createdBy: undefined,
+  //     updatedBy: undefined,
+  //     createdAt: undefined,
+  //     updatedAt: undefined,
+  //     avatar: undefined,
+  //     banner: undefined,
+  //     images: undefined
+  //   };
+  // }
 
   // static setupInstance(data, { /*store, */models }) {
   //   if ($lget(data, '_fastjoin.logins.ids', []).length) {
@@ -79,9 +79,9 @@ export class Users extends BaseModel {
   // }
 }
 
-const servicePath = "users";
+const servicePath = "cards";
 const useStore = defineStore({
-  Model: Users,
+  Model: Cards,
   servicePath,
   state() {
     return {};

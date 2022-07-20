@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="hHh lpR fff">
+  <q-layout view="hHh LpR fff">
     <q-header elevated>
       <q-toolbar>
         <q-btn flat
@@ -32,17 +32,13 @@
     </q-drawer>
 
     <q-page-container>
-      {{users}}
       <router-view />
     </q-page-container>
   </q-layout>
 </template>
 
 <script>
-import { defineComponent, ref, computed } from "vue";
-import { useFind } from "feathers-pinia";
-
-import useUsers from "stores/services/users";
+import { defineComponent, ref } from "vue";
 
 import EssentialLink from "components/EssentialLink.vue";
 
@@ -101,19 +97,7 @@ export default defineComponent({
   setup() {
     const leftDrawerOpen = ref(false);
 
-    const usersStore = useUsers();
-
-    const usersParams = computed(() => {
-      return {
-        query: {}
-      };
-    });
-
-    const usersData = useFind({ model: usersStore.Model, params: usersParams });
-    const users = usersData.items || [];
-
     return {
-      // users,
       essentialLinks: linksList,
       leftDrawerOpen,
       toggleLeftDrawer() {

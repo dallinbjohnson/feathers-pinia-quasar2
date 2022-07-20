@@ -5,8 +5,6 @@ import io from "socket.io-client";
 import { batchClient } from "feathers-batch/client";
 import { iff, discard, paramsForServer } from "feathers-hooks-common";
 
-import { setupFeathersPinia } from "feathers-pinia";
-
 if (process.env.DEV) console.log("Code running in development mode");
 if (process.env.PROD) console.log("Code running in production mode");
 const socket = io(process.env.VUE_APP_FEATHERS_URL || "http://localhost:3030", { transports: ["websocket"] });
@@ -57,8 +55,3 @@ feathersClient.configure(batchClient({
 
 
 export default feathersClient;
-
-export const { defineStore, BaseModel } = setupFeathersPinia({
-  clients: { api: feathersClient },
-  idField: "_id"
-});
