@@ -4,6 +4,7 @@ import auth from "@feathersjs/authentication-client";
 import io from "socket.io-client";
 import { batchClient } from "feathers-batch/client";
 import { iff, discard, paramsForServer } from "feathers-hooks-common";
+// import { paramsForServer } from "feathers-graph-populate";
 
 if (process.env.DEV) console.log("Code running in development mode");
 if (process.env.PROD) console.log("Code running in production mode");
@@ -41,10 +42,70 @@ const feathersClient = feathers()
           discard("__id", "__isTemp")
         ),
         context => {
-          // context.params = { ...context.params, ...paramsForServer(context.params) };
-          context.params = paramsForServer(context.params);
+          const query = {...context.params.query};
+          const params = {...context.params, query};
+          context.params = paramsForServer(params);
           console.log(JSON.stringify(context.params));
         }
+        // paramsForServer(
+        //   'disableSoftDelete',
+        //   '$globalAggregate',
+        //   // 'paginate',
+        //   'verify_methods',
+        //   'customLogo',
+        //   'customBaseUrl',
+        //   'customNextUrl',
+        //   'relate_hook',
+        //   'userJoin',
+        //   'rolesJoin',
+        //   'rulesJoin',
+        //   'withAbilities',
+        //   'loginsResolversQuery',
+        //   'usersResolversQuery',
+        //   'instances_fJoinHookResolversQuery',
+        //   'v-instances_fJoinHookResolversQuery',
+        //   'domains_fJoinHookResolversQuery',
+        //   'hosts_fJoinHookResolversQuery',
+        //   'environments_fJoinHookResolversQuery',
+        //   'applications_fJoinHookResolversQuery',
+        //   'integrations_fJoinHookResolversQuery',
+        //   'integration-auths_fJoinHookResolversQuery',
+        //   'in-app-messages_fJoinHookResolversQuery',
+        //   'accounts_fJoinHookResolversQuery',
+        //   'storesResolversQuery',
+        //   'stores_fJoinHookResolversQuery',
+        //   'counts_fJoinHookResolversQuery',
+        //   'count-inventory-items_fJoinHookResolversQuery',
+        //   'inventories_fJoinHookResolversQuery',
+        //   'inventory-items_fJoinHookResolversQuery',
+        //   'gl-accounts_fJoinHookResolversQuery',
+        //   'accountResolversQuery',
+        //   'products_fJoinHookResolversQuery',
+        //   'productsResolversQuery',
+        //   'quickbooks/companies_fJoinHookResolversQuery',
+        //   'replyResolversQuery',
+        //   'QRedirectUri',
+        //   'QState',
+        //   'roomResolversQuery',
+        //   'participantResolversQuery',
+        //   'paymentsResolversQuery',
+        //   'chatResolversQuery',
+        //   'boardResolversQuery',
+        //   'listResolversQuery',
+        //   'cardResolversQuery',
+        //   'cardEventResolversQuery',
+        //   'eventResolversQuery',
+        //   'participantEventResolversQuery',
+        //   'streamGroupResolversQuery',
+        //   'streamResolversQuery',
+        //   // 'extendUserResolversQuery',
+        //
+        //   // TODO: remove when fastjoins get refactored
+        //   '$fastJoinCards',
+        //   '$fastJoinCardUser',
+        //   '$fastJoinCardCommentsUser',
+        //   '$fastJoinShared',
+        // )
         // beforeHook
       ]
     }

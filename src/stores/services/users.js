@@ -84,6 +84,7 @@ const useStore = defineStore({
   Model: Users,
   servicePath,
   clients: { api: feathersClient },
+  idField: "_id",
   state() {
     return {};
   },
