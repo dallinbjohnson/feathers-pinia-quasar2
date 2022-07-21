@@ -1,14 +1,14 @@
-import feathers from "@feathersjs/feathers";
-import socketio from "@feathersjs/socketio-client";
-import auth from "@feathersjs/authentication-client";
-import io from "socket.io-client";
-import { batchClient } from "feathers-batch/client";
-import { iff, discard, paramsForServer } from "feathers-hooks-common";
+import feathers from '@feathersjs/feathers';
+import socketio from '@feathersjs/socketio-client';
+import auth from '@feathersjs/authentication-client';
+import io from 'socket.io-client';
+import { batchClient } from 'feathers-batch/client';
+import { iff, discard, paramsForServer } from 'feathers-hooks-common';
 // import { paramsForServer } from "feathers-graph-populate";
 
-if (process.env.DEV) console.log("Code running in development mode");
-if (process.env.PROD) console.log("Code running in production mode");
-const socket = io(process.env.VUE_APP_FEATHERS_URL || "http://localhost:3030", { transports: ["websocket"] });
+if (process.env.DEV) console.log('Code running in development mode');
+if (process.env.PROD) console.log('Code running in production mode');
+const socket = io(process.env.VUE_APP_FEATHERS_URL || 'http://localhost:3030', { transports: ['websocket'] });
 
 // const beforeHook = context => {
 //   // eslint-disable-next-line no-console
@@ -38,8 +38,8 @@ const feathersClient = feathers()
     before: {
       all: [
         iff(
-          context => ["create", "update", "patch"].includes(context.method),
-          discard("__id", "__isTemp")
+          context => ['create', 'update', 'patch'].includes(context.method),
+          discard('__id', '__isTemp')
         ),
         context => {
           const query = {...context.params.query};
@@ -112,8 +112,8 @@ const feathersClient = feathers()
   });
 
 feathersClient.configure(batchClient({
-  batchService: "batch",
-  exclude: ["authentication"]
+  batchService: 'batch',
+  exclude: ['authentication']
 }));
 
 

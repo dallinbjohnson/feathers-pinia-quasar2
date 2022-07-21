@@ -17,55 +17,55 @@
 </template>
 
 <script>
-import { defineComponent, computed, reactive } from "vue";
-import { useFind, usePagination } from "feathers-pinia";
+  import { defineComponent, computed, reactive } from 'vue';
+  import { useFind, usePagination } from 'feathers-pinia';
 
-import useCards from "stores/services/cards";
+  import useCards from 'stores/services/cards';
 
-export default defineComponent({
-  name: "IndexPage",
-  setup() {
-    const cardsStore = useCards();
+  export default defineComponent({
+    name: 'IndexPage',
+    setup() {
+      const cardsStore = useCards();
 
-    const pagination = reactive({ $limit: 5, $skip: 0 });
+      const pagination = reactive({ $limit: 5, $skip: 0 });
 
-    const cardsParams = computed(() => {
+      const cardsParams = computed(() => {
+        return {
+          query: {
+            ...pagination
+          },
+          qid: 'cards',
+          paginate: true
+        };
+      });
+
+      const { items: cards, latestQuery, ...meta } = useFind({
+        model: cardsStore.Model,
+        params: cardsParams
+      });
+      const {
+        // next,
+        // prev,
+        // canNext,
+        // canPrev,
+        currentPage,
+        // itemsCount,
+        pageCount,
+        toPage,
+        // toStart,
+        // toEnd
+      } = usePagination(pagination, latestQuery);
+
       return {
-        query: {
-          ...pagination
-        },
-        qid: 'cards',
-        paginate: true
+        meta,
+        cardsParams,
+        pagination,
+        latestQuery,
+        cards,
+        currentPage,
+        pageCount,
+        toPage
       };
-    });
-
-    const { items: cards, latestQuery, ...meta } = useFind({
-      model: cardsStore.Model,
-      params: cardsParams,
-    });
-    const {
-      next,
-      prev,
-      canNext,
-      canPrev,
-      currentPage,
-      itemsCount,
-      pageCount,
-      toPage,
-      toStart,
-      toEnd
-    } = usePagination(pagination, latestQuery);
-
-    return {
-      meta,
-      cardsParams,
-      pagination,
-      latestQuery,
-      cards,
-      currentPage,
-      pageCount,
-      toPage
-    };
-  }
-});
+    }
+  });
 </script>

@@ -1,7 +1,7 @@
-import { defineAuthStore } from 'feathers-pinia'
+import { defineAuthStore } from 'feathers-pinia';
 import feathersClient from '../api/feathers-client';
 
-import { Users } from './services/users.js'
+import { Users } from './services/users.js';
 
 // import {lodash} from '@iy4u/common-client-lib';
 // const {$lget} = lodash;
@@ -19,7 +19,7 @@ export default defineAuthStore({
   },
   getters: {
     user() {
-      return this.userId ? Users.getFromStore(this.userId) : null
+      return this.userId ? Users.getFromStore(this.userId) : null;
     },
 
     // activeLogin(state, getters, rootState) {
@@ -56,9 +56,9 @@ export default defineAuthStore({
   // },
   actions: {
     handleResponse(response) {
-      this.userId = response.user.id || response.user._id
-      Users.addToStore(response.user)
-      return response
+      this.userId = response.user.id || response.user._id;
+      Users.addToStore(response.user);
+      return response;
     },
   },
 });

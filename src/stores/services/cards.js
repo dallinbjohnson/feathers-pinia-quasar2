@@ -1,5 +1,5 @@
-import feathersClient from "../../api/feathers-client";
-import { defineStore, BaseModel } from "feathers-pinia";
+import feathersClient from '../../api/feathers-client';
+import { defineStore, BaseModel } from 'feathers-pinia';
 
 // import {/*diff, */lodash} from '@iy4u/common-client-lib';
 // const {$lget, $lset} = lodash;
@@ -79,12 +79,12 @@ export class Cards extends BaseModel {
   // }
 }
 
-const servicePath = "cards";
+const servicePath = 'cards';
 const useStore = defineStore({
   Model: Cards,
   servicePath,
   clients: { api: feathersClient },
-  idField: "_id",
+  idField: '_id',
   state() {
     return {};
   },

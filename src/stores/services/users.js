@@ -1,5 +1,5 @@
-import feathersClient from "../../api/feathers-client";
-import { defineStore, BaseModel } from "feathers-pinia";
+import feathersClient from '../../api/feathers-client';
+import { defineStore, BaseModel } from 'feathers-pinia';
 
 // import {/*diff, */lodash} from '@iy4u/common-client-lib';
 // const {$lget, $lset} = lodash;
@@ -38,15 +38,15 @@ export class Users extends BaseModel {
       settings: {
         theme: {
           darkMode: undefined,
-          "--q-color-primary": undefined,
-          "--q-color-secondary": undefined,
-          "--q-color-accent": undefined,
-          "--q-color-dark": undefined,
+          '--q-color-primary': undefined,
+          '--q-color-secondary': undefined,
+          '--q-color-accent': undefined,
+          '--q-color-dark': undefined,
 
-          "--q-color-positive": undefined,
-          "--q-color-negative": undefined,
-          "--q-color-info": undefined,
-          "--q-color-warning": undefined
+          '--q-color-positive': undefined,
+          '--q-color-negative': undefined,
+          '--q-color-info': undefined,
+          '--q-color-warning': undefined
         }
       },
       createdBy: undefined,
@@ -79,12 +79,12 @@ export class Users extends BaseModel {
   // }
 }
 
-const servicePath = "users";
+const servicePath = 'users';
 const useStore = defineStore({
   Model: Users,
   servicePath,
   clients: { api: feathersClient },
-  idField: "_id",
+  idField: '_id',
   state() {
     return {};
   },
