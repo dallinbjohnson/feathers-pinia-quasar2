@@ -6,6 +6,8 @@ import { batchClient } from 'feathers-batch/client';
 import { iff, discard, paramsForServer } from 'feathers-hooks-common';
 // import { paramsForServer } from "feathers-graph-populate";
 
+import { setupFeathersPinia } from 'feathers-pinia';
+
 if (process.env.DEV) console.log('Code running in development mode');
 if (process.env.PROD) console.log('Code running in production mode');
 const socket = io(process.env.VUE_APP_FEATHERS_URL || 'http://localhost:3030', { transports: ['websocket'] });
@@ -42,8 +44,8 @@ const feathersClient = feathers()
           discard('__id', '__isTemp')
         ),
         context => {
-          const query = {...context.params.query};
-          const params = {...context.params, query};
+          const query = { ...context.params.query };
+          const params = { ...context.params, query };
           context.params = paramsForServer(params);
           console.log(JSON.stringify(context.params));
         }
@@ -118,3 +120,8 @@ feathersClient.configure(batchClient({
 
 
 export default feathersClient;
+
+export const { defineStore, BaseModel } = setupFeathersPinia({
+  clients: { api: feathersClient },
+  idField: '_id'
+});
