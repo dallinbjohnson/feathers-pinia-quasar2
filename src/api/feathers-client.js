@@ -41,7 +41,9 @@ const feathersClient = feathers()
           discard("__id", "__isTemp")
         ),
         context => {
+          // context.params = { ...context.params, ...paramsForServer(context.params) };
           context.params = paramsForServer(context.params);
+          console.log(JSON.stringify(context.params));
         }
         // beforeHook
       ]
