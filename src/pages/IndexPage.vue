@@ -13,12 +13,18 @@
                   :max-pages="6"
                   direction-links
                   boundary-links></q-pagination>
+
+    vuex cards:
+    <ol>
+      <li v-for="(card, index) in vuexCards" :key="index">{{ card.name }}</li>
+    </ol>
   </q-page>
 </template>
 
 <script>
-  import { defineComponent, computed, reactive } from 'vue';
+  import { defineComponent, computed, reactive, watch, ref } from 'vue';
   import { useFind, usePagination } from 'feathers-pinia';
+  import { useFind as useFindVuex, models } from '@feathersjs/vuex';
 
   import useCards from 'stores/services/cards';
 
@@ -51,12 +57,36 @@
         currentPage,
         // itemsCount,
         pageCount,
-        toPage,
+        toPage
         // toStart,
         // toEnd
       } = usePagination(pagination, latestQuery);
 
+
+      const { Cards } = models.api;
+
+      const todosParams = computed(() => {
+        return {
+          query: {
+            ...pagination
+          },
+        };
+      });
+
+      const { latestQuery: vuexLatestQuery, ...vuexMeta } = useFindVuex({
+        model: Cards,
+        params: todosParams
+      });
+
+      let vuexCards = ref([]);
+
+      watch(vuexLatestQuery, () => {
+        vuexCards.value = vuexLatestQuery?.value?.response?.data || [];
+      }, {immediate: true, deep: true});
+
       return {
+        vuexMeta,
+        vuexCards,
         meta,
         cardsParams,
         pagination,

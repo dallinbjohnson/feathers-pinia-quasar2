@@ -21,6 +21,7 @@
     "@feathersjs/feathers": "^4.5.15",
     "@feathersjs/rest-client": "^4.5.15",
     "@feathersjs/socketio-client": "^4.5.15",
+    "@feathersjs/vuex": "^4.0.1-pre.7",
     "@ionrev/ir-encryption-client": "^0.1.0",
     "@iy4u/roles-client-lib": "^0.2.1",
     "@iy4u/zangodb": "^0.0.4",
@@ -47,7 +48,8 @@
     "eslint": "^8.10.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-vue": "^9.0.0",
-    "prettier": "^2.5.1"
+    "prettier": "^2.5.1",
+    "vite": "^2.9.14"
   },
   "engines": {
     "node": "^18 || ^16 || ^14.19",

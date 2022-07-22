@@ -7,6 +7,7 @@ import { iff, discard, paramsForServer } from 'feathers-hooks-common';
 // import { paramsForServer } from "feathers-graph-populate";
 
 import { setupFeathersPinia } from 'feathers-pinia';
+import feathersVuex from '@feathersjs/vuex';
 
 if (process.env.DEV) console.log('Code running in development mode');
 if (process.env.PROD) console.log('Code running in production mode');
@@ -125,3 +126,31 @@ export const { defineStore, BaseModel } = setupFeathersPinia({
   clients: { api: feathersClient },
   idField: '_id'
 });
+
+export const apiVuex = feathersVuex(
+  feathersClient,
+  {
+    serverAlias: 'api', // optional for working with multiple APIs (this is the default value)
+    idField: '_id', // Must match the id field in your database table/collection
+    whitelist: ['$regex', '$options', '$and'], // Custom query operators that will be allowed in the find getter.
+
+    // autoRemove: false, // Automatically remove records missing from responses (only use with feathers-rest)
+    // addOnUpsert: false, // Add new records pushed by 'updated/patched' socketio events into store, instead of discarding them
+    // enableEvents: true, // Listens to socket.io events when available
+    // tempIdField: '__id',
+    // debug: false, // Set to true to enable logging messages.
+    // keepCopiesInStore: false, // Set to true to store cloned copies in the store instead of on the Model.
+    // nameStyle: 'short', // Determines the source of the module name. 'short', 'path', or 'explicit'
+    // paramsForServer: [], // Custom query operators that are ignored in the find getter, but will pass through to the server.
+    // preferUpdate: false, // When true, calling model.save() will do an update instead of a patch.
+    // replaceItems: false, // Instad of merging in changes in the store, replace the entire record.
+    // skipRequestIfExists: false, // For get action, if the record already exists in store, skip the remote request
+
+    // handleEvents: {
+    //   created: (item, { model, models }) => options.enableEvents,
+    //   patched: (item, { model, models }) => options.enableEvents,
+    //   updated: (item, { model, models }) => options.enableEvents,
+    //   removed: (item, { model, models }) => options.enableEvents
+    // }, // For this to work enableEvents must be true
+  }
+);
